@@ -1,8 +1,84 @@
-<html>
-  <head>
-     <title>CIMPA School Sample Webpage</title>
-  </head>
-  <body>
-    Hello world
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Academic Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        nav {
+            background: #2c3e50;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .content {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+    </style>
+    <script>
+        function showSection(sectionId) {
+            var sections = document.querySelectorAll('.content');
+            sections.forEach(section => section.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Your Name</h1>
+        <p>PhD Student | Researcher in Mathematics</p>
+    </header>
+    
+    <nav>
+        <a href="#" onclick="showSection('about')">About</a>
+        <a href="#" onclick="showSection('research')">Research</a>
+        <a href="#" onclick="showSection('publications')">Publications</a>
+        <a href="#" onclick="showSection('contact')">Contact</a>
+    </nav>
+    
+    <section id="about" class="content active">
+        <h2>About Me</h2>
+        <p>I am a PhD student specializing in algebraic combinatorics. My research interests include symmetric functions, group representations, and category theory.</p>
+    </section>
+    
+    <section id="research" class="content">
+        <h2>Research</h2>
+        <p>My current work focuses on categorifications of cycle indicator series and the study of Schur positivity in symmetric functions.</p>
+    </section>
+    
+    <section id="publications" class="content">
+        <h2>Publications</h2>
+        <ul>
+            <li><a href="#">Title of Paper 1</a> - Journal Name, Year</li>
+            <li><a href="#">Title of Paper 2</a> - Conference Name, Year</li>
+        </ul>
+    </section>
+    
+    <section id="contact" class="content">
+        <h2>Contact</h2>
+        <p>Email: your.email@example.com</p>
+        <p>Website: <a href="https://yourwebsite.com">yourwebsite.com</a></p>
+    </section>
+</body>
 </html>
