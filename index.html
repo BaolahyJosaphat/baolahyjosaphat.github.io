@@ -31,15 +31,17 @@
         }
         .content {
             display: none;
+            display: flex;
+            align-items: center;
         }
         .active {
-            display: block;
+            display: flex;
         }
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 10px auto;
+        .content img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-right: 20px;
         }
     </style>
     <script>
@@ -54,7 +56,6 @@
     <header>
         <h1>Your Name</h1>
         <p>PhD Student | Researcher in Mathematics</p>
-        <img src="Josaphat-Baolahy.jpg" alt="Your Profile Picture">
     </header>
     
     <nav>
@@ -65,31 +66,40 @@
     </nav>
     
     <section id="about" class="content active">
-        <h2>About Me</h2>
         <img src="about.jpg" alt="About Me Image">
-        <p>I am a PhD student specializing in algebraic combinatorics. My research interests include symmetric functions, group representations, and category theory.</p>
+        <div>
+            <h2>About Me</h2>
+            <p>I am a PhD student specializing in algebraic combinatorics. My research interests include symmetric functions, group representations, and category theory.</p>
+        </div>
     </section>
     
     <section id="research" class="content">
-        <h2>Research</h2>
         <img src="research.jpg" alt="Research Image">
-        <p>My current work focuses on categorifications of cycle indicator series and the study of Schur positivity in symmetric functions.</p>
+        <div>
+            <h2>Research</h2>
+            <p>My current work focuses on categorifications of cycle indicator series and the study of Schur positivity in symmetric functions.</p>
+        </div>
     </section>
     
     <section id="publications" class="content">
-        <h2>Publications</h2>
         <img src="publications.jpg" alt="Publications Image">
-        <ul>
-            <li><a href="#">Title of Paper 1</a> - Journal Name, Year</li>
-            <li><a href="#">Title of Paper 2</a> - Conference Name, Year</li>
-        </ul>
+        <div>
+            <h2>Publications</h2>
+            <ul>
+                <li><a href="#">Title of Paper 1</a> - Journal Name, Year</li>
+                <li><a href="#">Title of Paper 2</a> - Conference Name, Year</li>
+            </ul>
+        </div>
     </section>
     
     <section id="contact" class="content">
-        <h2>Contact</h2>
         <img src="contact.jpg" alt="Contact Image">
-        <p>Email: your.email@example.com</p>
-        <p>Website: <a href="https://yourwebsite.com">yourwebsite.com</a></p>
+        <div>
+            <h2>Contact</h2>
+            <p>Email: your.email@example.com</p>
+            <p>Website: <a href="https://yourwebsite.com">yourwebsite.com</a></p>
+        </div>
     </section>
 </body>
 </html>
+
