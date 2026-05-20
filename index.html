@@ -1,142 +1,819 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Josaphat Baolahy - Website</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 900px;
-            margin: 20px auto;
-            padding: 20px;
-            line-height: 1.6;
-        }
-        h1, h2 {
-            color: #2c3e50;
-        }
-        nav {
-            background: #2c3e50;
-            padding: 10px;
-            text-align: center;
-        }
-        nav a {
-            color: white;
-            margin: 0 15px;
-            text-decoration: none;
-            font-size: 18px;
-        }
-        nav a:hover {
-            text-decoration: underline;
-        }
-        .content {
-            display: none;
-            align-items: center;
-        }
-        .active {
-            display: flex;
-        }
-        .content img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            margin-right: 20px;
-        }
-    </style>
-    <script>
-        function showSection(sectionId) {
-            var sections = document.querySelectorAll('.content');
-            sections.forEach(section => section.classList.remove('active'));
-            document.getElementById(sectionId).classList.add('active');
-        }
-    </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Josaphat Baolahy — Mathematician</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Mono:wght@300;400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink:        #1a1a2e;
+      --paper:      #f8f5ef;
+      --cream:      #f0ebe0;
+      --gold:       #b8962e;
+      --gold-light: #d4af5a;
+      --muted:      #6b6560;
+      --rule:       #d8d0c4;
+      --accent:     #2d5a8e;
+      --accent-lt:  #e8eff8;
+      --card-bg:    #ffffff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'EB Garamond', Georgia, serif;
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 18px;
+      line-height: 1.75;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 3.5rem 2rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        radial-gradient(ellipse 60% 80% at 90% 50%, rgba(184,150,46,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 10% 80%, rgba(45,90,142,0.18) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .header-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .header-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 0.75rem;
+    }
+    header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2.4rem, 6vw, 3.8rem);
+      line-height: 1.1;
+      letter-spacing: 0.01em;
+      margin-bottom: 0.5rem;
+    }
+    header h1 em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+    .header-sub {
+      font-size: 0.95rem;
+      color: rgba(248,245,239,0.65);
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+    .header-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.5rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: rgba(248,245,239,0.55);
+    }
+    .header-meta a { color: var(--gold-light); text-decoration: none; }
+    .header-meta a:hover { text-decoration: underline; }
+    .header-divider {
+      border: none;
+      border-top: 1px solid rgba(184,150,46,0.35);
+      margin: 1.5rem 0 0;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--cream);
+      border-bottom: 1px solid var(--rule);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .nav-inner::-webkit-scrollbar { display: none; }
+    nav button {
+      background: none;
+      border: none;
+      padding: 0.9rem 1.3rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      cursor: pointer;
+      white-space: nowrap;
+      position: relative;
+      transition: color 0.2s;
+    }
+    nav button::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transition: transform 0.2s ease;
+    }
+    nav button:hover { color: var(--ink); }
+    nav button.active { color: var(--ink); }
+    nav button.active::after { transform: scaleX(1); }
+
+    /* ── MAIN ── */
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 5rem;
+    }
+
+    .section { display: none; animation: fadeUp 0.35s ease both; }
+    .section.active { display: block; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── SECTION HEADER ── */
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 2rem;
+      color: var(--ink);
+      margin-bottom: 0.3rem;
+    }
+    .section-rule {
+      border: none;
+      border-top: 1px solid var(--gold);
+      margin-bottom: 2rem;
+      width: 4rem;
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 560px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .about-photo { width: 100px !important; }
+    }
+    .about-photo {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--gold);
+      display: block;
+    }
+    .about-photo-placeholder {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--ink) 0%, var(--accent) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-light);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      font-weight: 300;
+      border: 3px solid var(--gold);
+      flex-shrink: 0;
+    }
+    .about-text p { margin-bottom: 1rem; color: #333; }
+    .about-text p:last-child { margin-bottom: 0; }
+    .about-text a { color: var(--accent); }
+    .funding-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: var(--accent-lt);
+      color: var(--accent);
+      border: 1px solid rgba(45,90,142,0.2);
+      border-radius: 3px;
+      padding: 0.3rem 0.65rem;
+      margin-top: 0.5rem;
+    }
+
+    /* ── RESEARCH ── */
+    .paper-card {
+      background: var(--card-bg);
+      border: 1px solid var(--rule);
+      border-left: 3px solid var(--gold);
+      border-radius: 4px;
+      padding: 1.4rem 1.5rem;
+      margin-bottom: 1.2rem;
+      transition: box-shadow 0.2s, border-left-color 0.2s;
+    }
+    .paper-card:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+      border-left-color: var(--accent);
+    }
+    .paper-card .paper-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.4rem;
+    }
+    .paper-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      font-size: 1.2rem;
+      margin-bottom: 0.4rem;
+      line-height: 1.35;
+    }
+    .paper-card h3 a { color: var(--ink); text-decoration: none; }
+    .paper-card h3 a:hover { color: var(--accent); }
+    .paper-card .paper-meta {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+    .paper-card .paper-abstract {
+      font-size: 0.9rem;
+      color: #555;
+      line-height: 1.6;
+    }
+    .paper-card .paper-links {
+      margin-top: 0.9rem;
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+    .paper-link {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.75rem;
+      border-radius: 3px;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    .paper-link.primary {
+      background: var(--ink);
+      color: var(--paper);
+    }
+    .paper-link.primary:hover { background: var(--accent); }
+    .paper-link.secondary {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--rule);
+    }
+    .paper-link.secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+    .research-interests {
+      background: var(--cream);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      padding: 1.2rem 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .research-interests h4 {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.7rem;
+    }
+    .interest-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .interest-tag {
+      font-size: 0.85rem;
+      font-style: italic;
+      background: white;
+      border: 1px solid var(--rule);
+      border-radius: 20px;
+      padding: 0.2rem 0.8rem;
+      color: var(--ink);
+    }
+
+    /* ── PUBLICATIONS ── */
+    .pub-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, var(--ink), var(--accent));
+      color: white;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.9rem;
+      border-radius: 3px;
+      margin-bottom: 1.5rem;
+    }
+    .pub-badge::before {
+      content: '✦';
+      color: var(--gold-light);
+    }
+    .pub-entry {
+      background: var(--card-bg);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      padding: 1.6rem;
+      margin-bottom: 1.2rem;
+    }
+    .pub-entry .pub-venue {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+    .pub-entry h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+    }
+    .pub-entry .pub-authors {
+      font-size: 0.9rem;
+      font-style: italic;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+    .pub-entry .pub-details {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin-bottom: 0.9rem;
+    }
+    .pub-keywords {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+    .pub-keyword {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      background: var(--accent-lt);
+      color: var(--accent);
+      border-radius: 2px;
+      padding: 0.15rem 0.5rem;
+    }
+
+    /* ── ACTIVITIES ── */
+    .activity-list { list-style: none; }
+    .activity-list li {
+      padding: 0.8rem 0;
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .activity-list li:last-child { border-bottom: none; }
+    .activity-icon {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      color: var(--gold);
+      text-transform: uppercase;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+      min-width: 60px;
+    }
+    .activity-list a { color: var(--accent); }
+    .activity-list p { font-style: italic; color: #555; font-size: 0.95rem; }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media (max-width: 560px) { .projects-grid { grid-template-columns: 1fr; } }
+    .project-card {
+      background: var(--card-bg);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      padding: 1.3rem;
+      transition: box-shadow 0.2s;
+    }
+    .project-card:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.07); }
+    .project-icon {
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+    .project-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+    }
+    .project-card p {
+      font-size: 0.87rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+    .project-status {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 0.5rem;
+    }
+
+    /* ── READINGS ── */
+    .book-card {
+      background: var(--card-bg);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      padding: 1.3rem 1.5rem;
+      margin-bottom: 1rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .book-spine {
+      width: 6px;
+      align-self: stretch;
+      background: var(--gold);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .book-info h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      font-size: 1.05rem;
+      line-height: 1.35;
+      margin-bottom: 0.3rem;
+    }
+    .book-info .book-author {
+      font-style: italic;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    /* ── CONTACT ── */
+    .contact-card {
+      background: var(--card-bg);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      padding: 2rem;
+      max-width: 480px;
+    }
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .contact-row:last-child { border-bottom: none; }
+    .contact-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      min-width: 70px;
+    }
+    .contact-row a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+    .contact-row a:hover { text-decoration: underline; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      border-top: 1px solid var(--rule);
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Josaphat Baolahy</h1>
-        <p>PhD Student, Université de Fianarantsoa | Researcher in Mathematics</p>
-        <p>Advisors : <a href="https://bergeron.math.uqam.ca/fr/francois-bergeron/"> François Bergeron</a> , UQAM, Canada and Benjamin Randrianirina, Université de Fianarantsoa </p>
-        <p>My PhD is funded by <a href="https://friends-imu.org/graid/"> International Mathematical Union </a> through the GRAID program </p>
-    </header>
-    
-    <nav>
-        <a href="#" onclick="showSection('about')">About</a>
-        <a href="#" onclick="showSection('research')">Research</a>
-        <a href="#" onclick="showSection('publications')">Publications</a>
-        <a href="#" onclick="showSection('activities')">Activities</a>
-        <a href="#" onclick="showSection('projects')">Projects</a>
-        <a href="#" onclick="showSection('readings')">Readings</a>
-        <a href="#" onclick="showSection('contact')">Contact</a>
-    </nav>
-    
-    <section id="about" class="content active">
-        <img src="Josaphat-Baolahy.jpg" alt="About Me Image">
-        <div>
-            <h2>About Me</h2>
-            <p>I am a PhD student specializing in algebraic combinatorics. My research interests include symmetric functions, group representations, Combinatorial species theory.</p>
-        </div>
-    </section>
-    
-    <section id="research" class="content">
-        <div>
-            <h2>Research</h2>
-            <ol>
-                <li> <a href="https://www.researchgate.net/publication/368405559_Schur_expansion_of_the_cycle_index_series_of_species"> Schur expansion of the cycle index series </a>- Master Thesis</li>
-                <li> <a href="https://www.researchgate.net/publication/384903000_Class_Order_of_the_Cycle_Partition_nm_in_S"> Class Order of the Cycle Partition $(nm)$ in $S_n\wr S_m$ </a></li>
-                
-            </ol>
-            <p>My current work focuses on Schur positivity in symmetric functions and Schur expansion of tensor power .</p>
-            
-        </div>
-    </section>
-    
-    <section id="publications" class="content">
-        <div>
-            <h2>Publications</h2>
-            <p> No publications yet </p>
-        </div>
-    </section>
-    
-    <section id="activities" class="content">
-        <div>
-            <h2>Activities</h2>
-            <ul>
-                <li><a href="https://math.stackexchange.com/users/677838/josaphat-baolahy">Math Stackexchange</a></li>
-                <li><a href="https://www.hackerrank.com/profile/japhtbaolahy">Hackerrank 2</a> </li>
-                <li><a href="https://oeis.org/search?q=josaphat+baolahy&language=english&go=Search">OEIS </a> </li>
-                <li><p> Learning Data Science Data Wrangling, Exploration, Visualization, and Modeling with Python, par Sam Lau, Joseph Gonzalez, Deborah Nolan · 2023</p></li>
-                <li><p>Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow, par Aurélien Géron · 2022</p></li>
-            </ul>
-        </div>
-    </section>
-    <section id="projects" class="content">
-        <div>
-            <h2>Projects</h2>
-            <ul>
-                <li> <strong> Finance</strong></li>
-                <li> <strong> Healthcare</strong></li>
-                <li> <strong> Climate Change and Ecology</strong></li>
-                <li> <strong> Business</strong></li>
-            </ul>
-        </div>
 
-    </section>
-    <section id="readings" class="content">
-        <div>
-            <h2>Readings</h2>
-            <ul>
-               <li><p>The Man Who Solved the Market: How Jim Simons Launched the Quant Revolution Hardcover – Illustrated, November 5, 2019, by Gregory Zuckerman</p></li> 
-            </ul>
+<header>
+  <div class="header-inner">
+    <p class="header-label">Academic Portfolio</p>
+    <h1>Josaphat <em>Baolahy</em></h1>
+    <p class="header-sub">PhD Candidate in Mathematics · Algebraic Combinatorics</p>
+    <div class="header-meta">
+      <span>Université de Fianarantsoa</span>
+      <span>·</span>
+      <a href="https://bergeron.math.uqam.ca/fr/francois-bergeron/">Advisor: François Bergeron</a>, UQAM
+      <span>·</span>
+      <span>Co-advisor: Benjamin Randrianirina</span>
+      <span>·</span>
+      <a href="https://friends-imu.org/graid/">IMU–GRAID Fellow</a>
+    </div>
+    <hr class="header-divider" />
+  </div>
+</header>
 
-        </div>
-    </section>
-    <section id="contact" class="content">
+<nav>
+  <div class="nav-inner">
+    <button class="active" onclick="show('about', this)">About</button>
+    <button onclick="show('research', this)">Research</button>
+    <button onclick="show('publications', this)">Publications</button>
+    <button onclick="show('activities', this)">Activities</button>
+    <button onclick="show('projects', this)">Projects</button>
+    <button onclick="show('readings', this)">Readings</button>
+    <button onclick="show('contact', this)">Contact</button>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ABOUT -->
+  <section id="about" class="section active">
+    <h2 class="section-title">About</h2>
+    <hr class="section-rule" />
+    <div class="about-grid">
+      <div class="about-photo-placeholder">JB</div>
+      <div class="about-text">
+        <p>
+          I am a PhD candidate in Mathematics at the <strong>Université de Fianarantsoa</strong>, Madagascar,
+          specialising in <em>algebraic combinatorics</em>. My doctoral work is conducted under the joint supervision
+          of <a href="https://bergeron.math.uqam.ca/fr/francois-bergeron/">François Bergeron</a> (UQAM, Canada)
+          and Benjamin Randrianirina (Université de Fianarantsoa).
+        </p>
+        <p>
+          My research sits at the intersection of <em>symmetric function theory</em>,
+          <em>combinatorial species</em>, and <em>representation theory of the symmetric group</em>.
+          A central theme of my current work is understanding the Kronecker product of symmetric functions
+          through the lens of species-theoretic constructions.
+        </p>
+        <p>
+          My PhD is supported by the
+          <a href="https://friends-imu.org/graid/">International Mathematical Union (IMU)</a>
+          through the Graduate Research Assistantship in Developing Countries (GRAID) programme.
+        </p>
+        <span class="funding-tag">IMU · GRAID Programme</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section id="research" class="section">
+    <h2 class="section-title">Research</h2>
+    <hr class="section-rule" />
+
+    <div class="paper-card">
+      <p class="paper-tag">Published · 2026</p>
+      <h3><a href="https://doi.org/10.54550/ECA2026V6S3R19" target="_blank">
+        Species, Symmetric Functions and Kronecker Product
+      </a></h3>
+      <p class="paper-meta">
+        J. W. V. Baolahy &amp; B. Randrianirina &nbsp;·&nbsp;
+        <em>Enumerative Combinatorics and Applications</em>, Vol. 6, No. 3, Article #S2R19, 2026
+      </p>
+      <p class="paper-abstract">
+        We study two new families of symmetric functions arising from a species-theoretic construction
+        motivated by cycle structure. For each partition of <em>n</em>, we define two families of combinatorial
+        molecules giving rise to bases of the homogeneous symmetric functions of degree <em>n</em>. We
+        prove closure under the Kronecker product and generalise the classical Garsia–Remmel theorem to
+        these new settings.
+      </p>
+      <div class="paper-links">
+        <a href="https://doi.org/10.54550/ECA2026V6S3R19" class="paper-link primary" target="_blank">DOI ↗</a>
+        <a href="https://ecajournal.haifa.ac.il/Volume2026/ECA2026_S2A19.pdf" class="paper-link secondary" target="_blank">PDF ↗</a>
+      </div>
+    </div>
+
+    <div class="paper-card">
+      <p class="paper-tag">Master Thesis · 2023</p>
+      <h3><a href="https://www.researchgate.net/publication/368405559_Schur_expansion_of_the_cycle_index_series_of_species" target="_blank">
+        Schur Expansion of the Cycle Index Series of Species
+      </a></h3>
+      <p class="paper-meta">J. W. V. Baolahy &nbsp;·&nbsp; Master Thesis, Université de Fianarantsoa</p>
+      <p class="paper-abstract">
+        A study of the Schur-positive decomposition of cycle index series associated with combinatorial
+        species, exploring the representation-theoretic underpinnings of species-generated symmetric functions.
+      </p>
+      <div class="paper-links">
+        <a href="https://www.researchgate.net/publication/368405559_Schur_expansion_of_the_cycle_index_series_of_species" class="paper-link primary" target="_blank">ResearchGate ↗</a>
+      </div>
+    </div>
+
+    <div class="paper-card">
+      <p class="paper-tag">Preprint</p>
+      <h3><a href="https://www.researchgate.net/publication/384903000_Class_Order_of_the_Cycle_Partition_nm_in_S" target="_blank">
+        Class Order of the Cycle Partition (nm) in S<sub>n</sub> ≀ S<sub>m</sub>
+      </a></h3>
+      <p class="paper-meta">J. W. V. Baolahy</p>
+      <p class="paper-abstract">
+        An investigation of the class orders of specific cycle partitions in the wreath product
+        S<sub>n</sub> ≀ S<sub>m</sub>, contributing to the combinatorial study of these groups.
+      </p>
+      <div class="paper-links">
+        <a href="https://www.researchgate.net/publication/384903000_Class_Order_of_the_Cycle_Partition_nm_in_S" class="paper-link primary" target="_blank">ResearchGate ↗</a>
+      </div>
+    </div>
+
+    <div class="research-interests">
+      <h4>Research Interests</h4>
+      <div class="interest-tags">
+        <span class="interest-tag">Symmetric Functions</span>
+        <span class="interest-tag">Combinatorial Species Theory</span>
+        <span class="interest-tag">Kronecker Product</span>
+        <span class="interest-tag">Schur Positivity</span>
+        <span class="interest-tag">Group Representations</span>
+        <span class="interest-tag">Cycle Index Series</span>
+        <span class="interest-tag">Algebraic Combinatorics</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section id="publications" class="section">
+    <h2 class="section-title">Publications</h2>
+    <hr class="section-rule" />
+
+    <span class="pub-badge">Peer-Reviewed Article</span>
+
+    <div class="pub-entry">
+      <p class="pub-venue">Enumerative Combinatorics and Applications · ECA 6:3 (2026) #S2R19</p>
+      <h3>Species, Symmetric Functions and Kronecker Product</h3>
+      <p class="pub-authors">Josaphat W. V. Baolahy and Benjamin Randrianirina</p>
+      <p class="pub-details">
+        Received: December 12, 2025 &nbsp;·&nbsp; Accepted: April 26, 2026 &nbsp;·&nbsp; Published: May 8, 2026
+        &nbsp;·&nbsp; DOI: 10.54550/ECA2026V6S3R19
+        &nbsp;·&nbsp; Released under CC BY-ND 4.0
+      </p>
+      <div class="pub-keywords">
+        <span class="pub-keyword">Algebraic Combinatorics</span>
+        <span class="pub-keyword">Species Theory</span>
+        <span class="pub-keyword">Cycle Index Series</span>
+        <span class="pub-keyword">Kronecker Product</span>
+        <span class="pub-keyword">Symmetric Functions</span>
+        <span class="pub-keyword">MSC: 05E05 · 05A15 · 05E10 · 18D10</span>
+      </div>
+      <div class="paper-links">
+        <a href="https://doi.org/10.54550/ECA2026V6S3R19" class="paper-link primary" target="_blank">DOI ↗</a>
+        <a href="https://ecajournal.haifa.ac.il/Volume2026/ECA2026_S2A19.pdf" class="paper-link secondary" target="_blank">Full PDF ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACTIVITIES -->
+  <section id="activities" class="section">
+    <h2 class="section-title">Activities</h2>
+    <hr class="section-rule" />
+    <ul class="activity-list">
+      <li>
+        <span class="activity-icon">Q &amp; A</span>
         <div>
-            <h2>Contact</h2>
-            <p>Email1: <a href="mailto:japhtbaolahy@gmail.com"> japhtbaolahy@gmail.com </a></p>
-            <p>Email2: <a href="mailto:josaphat.baolahy@univ-fianarantsoa.mg"> josaphat.baolahy@univ-fianarantsoa.mg</a></p>
+          <a href="https://math.stackexchange.com/users/677838/josaphat-baolahy" target="_blank">Mathematics Stack Exchange</a>
+          <p>Active contributor to mathematical problem-solving and discussion.</p>
         </div>
-    </section>
+      </li>
+      <li>
+        <span class="activity-icon">Coding</span>
+        <div>
+          <a href="https://www.hackerrank.com/profile/japhtbaolahy" target="_blank">HackerRank</a>
+          <p>Competitive programming and algorithmic problem-solving.</p>
+        </div>
+      </li>
+      <li>
+        <span class="activity-icon">Sequences</span>
+        <div>
+          <a href="https://oeis.org/search?q=josaphat+baolahy&language=english&go=Search" target="_blank">OEIS Contributions</a>
+          <p>Contributor to the Online Encyclopedia of Integer Sequences.</p>
+        </div>
+      </li>
+      <li>
+        <span class="activity-icon">Learning</span>
+        <div>
+          <p><em>Learning Data Science: Data Wrangling, Exploration, Visualization, and Modeling with Python</em> — Sam Lau, Joseph Gonzalez, Deborah Nolan (2023)</p>
+        </div>
+      </li>
+      <li>
+        <span class="activity-icon">Learning</span>
+        <div>
+          <p><em>Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow</em> — Aurélien Géron (2022)</p>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="section">
+    <h2 class="section-title">Projects</h2>
+    <hr class="section-rule" />
+    <p style="color:var(--muted); font-style:italic; margin-bottom:1.5rem; font-size:0.95rem;">
+      Applied mathematics and data science projects currently in development.
+    </p>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-icon">📈</div>
+        <h3>Finance</h3>
+        <p>Mathematical modelling and quantitative analysis in financial systems.</p>
+        <p class="project-status">In development</p>
+      </div>
+      <div class="project-card">
+        <div class="project-icon">🏥</div>
+        <h3>Healthcare</h3>
+        <p>Data-driven approaches to healthcare modelling and analytics.</p>
+        <p class="project-status">In development</p>
+      </div>
+      <div class="project-card">
+        <div class="project-icon">🌍</div>
+        <h3>Climate &amp; Ecology</h3>
+        <p>Statistical and combinatorial tools applied to climate change research.</p>
+        <p class="project-status">In development</p>
+      </div>
+      <div class="project-card">
+        <div class="project-icon">💼</div>
+        <h3>Business</h3>
+        <p>Optimisation and decision-making models for business applications.</p>
+        <p class="project-status">In development</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- READINGS -->
+  <section id="readings" class="section">
+    <h2 class="section-title">Readings</h2>
+    <hr class="section-rule" />
+    <div class="book-card">
+      <div class="book-spine"></div>
+      <div class="book-info">
+        <h3>The Man Who Solved the Market: How Jim Simons Launched the Quant Revolution</h3>
+        <p class="book-author">Gregory Zuckerman — Portfolio/Penguin, November 2019</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section">
+    <h2 class="section-title">Contact</h2>
+    <hr class="section-rule" />
+    <div class="contact-card">
+      <div class="contact-row">
+        <span class="contact-label">Personal</span>
+        <a href="mailto:japhtbaolahy@gmail.com">japhtbaolahy@gmail.com</a>
+      </div>
+      <div class="contact-row">
+        <span class="contact-label">Institutional</span>
+        <a href="mailto:josaphat.baolahy@univ-fianarantsoa.mg">josaphat.baolahy@univ-fianarantsoa.mg</a>
+      </div>
+      <div class="contact-row">
+        <span class="contact-label">University</span>
+        <span style="font-size:0.92rem; color:#444;">Université de Fianarantsoa, Madagascar</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Josaphat W. V. Baolahy &nbsp;·&nbsp; Université de Fianarantsoa &nbsp;·&nbsp; Updated 2026
+</footer>
+
+<script>
+  function show(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+</script>
 </body>
 </html>
-
